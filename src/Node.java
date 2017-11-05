@@ -50,7 +50,7 @@ class Node {
                     }
                 }
             }
-            printQuestion(filename, nodes);
+            printPuzzle(filename, nodes);
             return nodes;
         } catch (FileNotFoundException fnfe) {
             fnfe.printStackTrace();
@@ -58,6 +58,30 @@ class Node {
             ioe.printStackTrace();
         }
         return null;
+    }
+
+    static void printNodes(Node[][] nodes) {
+        System.out.print("\r\n");
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print(nodes[i][j].printDomain());
+            }
+            System.out.print("\r\n");
+        }
+    }
+
+    private static void printPuzzle(String filename, Node[][] nodes) {
+        System.out.println("loading puzzle from " + filename + "...\r\n");
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (nodes[i][j].domain.size() > 1) {
+                    System.out.print("[0]");
+                } else {
+                    System.out.print(nodes[i][j].printDomain());
+                }
+            }
+            System.out.print("\r\n");
+        }
     }
 
     // error, return -1
@@ -113,30 +137,6 @@ class Node {
         }
 
         return 0;
-    }
-
-    static void printNodes(Node[][] nodes) {
-        System.out.print("\r\n");
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                System.out.print(nodes[i][j].printDomain());
-            }
-            System.out.print("\r\n");
-        }
-    }
-
-    private static void printQuestion(String filename, Node[][] nodes) {
-        System.out.println("loading question from " + filename + "...\r\n");
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (nodes[i][j].domain.size() > 1) {
-                    System.out.print("[0]");
-                } else {
-                    System.out.print(nodes[i][j].printDomain());
-                }
-            }
-            System.out.print("\r\n");
-        }
     }
 
     private int calcBox(int row, int col) {

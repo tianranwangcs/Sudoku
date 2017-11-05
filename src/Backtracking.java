@@ -50,8 +50,7 @@ public class Backtracking {
     // not end, return 1
     // find solution, return 0
     int search(Node node) {
-        int originalState = stack.size();
-        int tmpState = originalState;
+        int state = stack.size();
 
         // 0 or -1
         int result = Node.judgeState(nodes);
@@ -72,11 +71,11 @@ public class Backtracking {
             setNodeValue(node, value);
             if (!forwardCheck()) {
                 // if this value is invalid
-                backtrackState(tmpState);
+                backtrackState(state);
                 if (!removeNodeValue(node, value)) {
                     return -1;
                 }
-                tmpState = stack.size();
+                state = stack.size();
                 value = getHeuristicValue(node);
             } else {
                 // if this value is valid
@@ -85,11 +84,11 @@ public class Backtracking {
                 if (result == 0) {
                     return 0;
                 } else if (result == -1) {
-                    backtrackState(tmpState);
+                    backtrackState(state);
                     if (!removeNodeValue(node, value)) {
                         return -1;
                     }
-                    tmpState = stack.size();
+                    state = stack.size();
                 }
                 value = getHeuristicValue(node);
             }
@@ -103,8 +102,6 @@ public class Backtracking {
         boolean isContinue = false;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                // check all input nodes on initial step
-                // but check newly changed node on later steps
                 if (nodes[i][j].domain.size() == 1) {
                     ArrayList<Node> neighbors = getNeighbors(nodes[i][j]);
                     for (Node n : neighbors) {

@@ -60,11 +60,11 @@ public class AC3 {
     }
 
     void addBoxArcs(int box) {
+        // add nodes which are in the same box together
         ArrayList<Node> nodesBox = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (nodes[i][j].box == box) {
-                    // shallow copy
                     nodesBox.add(nodes[i][j]);
                 }
             }
