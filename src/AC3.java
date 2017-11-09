@@ -30,14 +30,16 @@ public class AC3 {
             Arc arch = arcs.remove(0);
             if (!establishAC(arch)) {
                 System.out.println("no solution.");
+                break;
             }
         }
 
-        Node.printNodes(nodes);
-
         int result = Node.judgeState(nodes);
-        if (result== 1){
-            new Backtracking(nodes,false);
+        if (result != -1) {
+            Node.printNodes(nodes);
+        }
+        if (result == 1) {
+            new Backtracking(nodes, false);
         }
     }
 
